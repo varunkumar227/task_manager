@@ -111,3 +111,14 @@ li {
     border-radius: 3px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
+
+
+button#searchTask {
+    background-color: #3498db; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}

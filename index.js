@@ -1,32 +1,22 @@
-var addButton = document.getElementById("addTask");
-var searchInput = document.getElementById("search");
-var taskList = document.getElementById("taskList");
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-var tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-
-function updateTaskList() {
-    taskList.innerHTML = "";
+function updateTaskList(taskList, tasks) {
+    taskList.html("");
     tasks.forEach(function (task, index) {
-        var taskItem = document.createElement("li");
+        let taskItem = document.createElement("li");
         taskItem.className = "task-item";
         taskItem.innerHTML = "<b>" + task.assignedTo + "</b> - <strong>" + task.taskName + "</strong> - " + task.description + " for " + task.taskDuration + " " + task.durationUnit + " finish before " + task.deadLine + "  <button class='delete-button' onclick='deleteTask(" + index + ")'> Delete </button> <button class='edit-button' onclick='editTask(" + index + ")'> Edit </button>";
-        taskList.appendChild(taskItem);
+        taskList.append(taskItem);
     });
 }
 
-updateTaskList();
-
-addButton.addEventListener("click", function() {
-    addTask();
-});
-
-function addTask() {
-    var assignedTo = document.getElementById("assignedTo").value;
-    var taskName = document.getElementById("taskName").value;
-    var description = document.getElementById("description").value;
-    var deadLine = document.getElementById("deadLine").value;
-    var taskDuration = document.getElementById("taskDuration").value;
-    var durationUnit = document.getElementById("durationUnit").value;
+function addTask(tasks) {
+    const assignedTo = $("#assignedTo").val();
+    const taskName = $("#taskName").val();
+    const description = $("#description").val();
+    const deadLine = $("#deadLine").val();
+    const taskDuration = $("#taskDuration").val();
+    const durationUnit = $("#durationUnit").val();
 
     tasks.push({
         assignedTo: assignedTo,
@@ -40,11 +30,12 @@ function addTask() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     // Clear the input fields
-    document.getElementById("assignedTo").value = "";
-    document.getElementById("taskName").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("deadLine").value = "";
-    document.getElementById("taskDuration").value = "";
+    $("#assignedTo").val("");
+    $("#taskName").val("");
+    $("#description").val("");
+    $("#deadLine").val("");
+    $("#taskDuration").val("");
+
 
     updateTaskList();
 }
@@ -58,19 +49,34 @@ function deleteTask(index) {
 function editTask(index) {
     // Edit the task at the specified index
     // ...
-
+    console.log("///////////////////////////", index)
     localStorage.setItem("tasks", JSON.stringify(tasks));
     updateTaskList();
 }
 
-searchInput.addEventListener("input", function() {
-    var searchTerm = searchInput.value.toLowerCase();
-    var filteredTasks = tasks.filter(function(task) {
-        return task.assignedTo.toLowerCase().includes(searchTerm) || task.taskName.toLowerCase().includes(searchTerm);
+
+function searchTasks(searchQuery, taskList){
+    const tasks = JSON.parse(localStorage.getItem("tasks")) || []
+    let filteredTasks = tasks.filter(task => {
+        return task.taskName.includes(searchQuery) || task.assignedTo.includes(searchQuery) || task.description.includes(searchQuery)
+    })
+    updateTaskList(taskList, filteredTasks);
+}
+
+
+$(document).ready( () => {
+    let searchInput = $("#search");
+    let taskList = $("#taskList");
+
+    let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+    updateTaskList(taskList, tasks);
+
+    $("#addTask").click(() => {
+        addTask(tasks);
     });
-    taskList.innerHTML = "";
-    filteredTasks.forEach(function (task, index) {
-        // Display filtered tasks
-        // ...
-    });
+
+    $("#searchTask").click(()=> {
+        const searchQuery = $("#searchText").val().trim();
+        searchTasks(searchQuery, taskList)
+    })
 });
