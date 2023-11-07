@@ -9,7 +9,7 @@ function updateTaskList() {
     tasks.forEach(function (task, index) {
         var taskItem = document.createElement("li");
         taskItem.className = "task-item";
-        taskItem.innerHTML = "<b>" + task.name + "</b> - <strong>" + task.taskName + "</strong> - " + task.description + " for " + task.taskDuration + " " + task.durationUnit + " finish before " + task.deadLine + "  <button class='delete-button' onclick='deleteTask(" + index + ")'> Delete </button> <button class='edit-button' onclick='editTask(" + index + ")'> Edit </button>";
+        taskItem.innerHTML = "<b>" + task.assignedTo + "</b> - <strong>" + task.taskName + "</strong> - " + task.description + " for " + task.taskDuration + " " + task.durationUnit + " finish before " + task.deadLine + "  <button class='delete-button' onclick='deleteTask(" + index + ")'> Delete </button> <button class='edit-button' onclick='editTask(" + index + ")'> Edit </button>";
         taskList.appendChild(taskItem);
     });
 }
@@ -21,7 +21,7 @@ addButton.addEventListener("click", function() {
 });
 
 function addTask() {
-    var name = document.getElementById("assignedTo").value;
+    var assignedTo = document.getElementById("assignedTo").value;
     var taskName = document.getElementById("taskName").value;
     var description = document.getElementById("description").value;
     var deadLine = document.getElementById("deadLine").value;
