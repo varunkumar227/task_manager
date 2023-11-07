@@ -4,11 +4,12 @@ addButton.addEventListener("click", function() {
     addTask();
 });
 function addTask() {
-    var task = document.getElementById("task").value;
+    var taskName = document.getElementById("taskName").value;
     var name = document.getElementById("name").value;
+    var description = document.getElementById("description").value;
     var taskDuration = document.getElementById("taskDuration").value;
     var durationUnit = document.getElementById("durationUnit").value;
-    if (task === "" ||name === "" || taskDuration === "") {
+    if (taskName === "" ||name === "" || taskDuration === "") {
         alert("Task details cannot be empty!");
         return;
     }
@@ -16,12 +17,13 @@ function addTask() {
     var taskList = document.getElementById("taskList");
     var taskItem = document.createElement("li");
     taskItem.className = "task-item";
-    taskItem.innerHTML = `<b>${name}</b> - <strong>${task}</strong> - ${taskDuration} ${durationUnit} <button class="delete-button" onclick="deleteTask(this)">Delete</button>`;
+    taskItem.innerHTML = `<b>${name}</b> - <strong>${taskName}</strong> -${description} ${taskDuration} ${durationUnit} <button class="delete-button" onclick="deleteTask(this)">Delete</button>`;
     taskList.appendChild(taskItem);
 
     // Clear the input fields
-    document.getElementById("task").value = "";
+    document.getElementById("taskName").value = "";
     document.getElementById("name").value = "";
+    document.getElementById("description").value = "";
     document.getElementById("taskDuration").value = "";
 }
 

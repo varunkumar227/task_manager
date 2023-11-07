@@ -1,6 +1,13 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light gray background */
 }
+
+body, h1, ul {
+    margin: 0;
+    padding: 0;
+}
+
 .task-list {
     list-style: none;
     padding: 0;
@@ -9,9 +16,79 @@ body {
     margin-bottom: 10px;
 }
 .delete-button {
+    margin-left: 50%;
     background-color: #ff3333;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+h1 {
+    background-color: #3498db; 
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button#addTask {
+    background-color: #3498db; /* Blue background */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+button#addTask:hover {
+    background-color: #2980b9; /* Darker blue on hover */
+}
+
+ul.task-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+li:nth-child(odd) {
+    background-color: #3498db; /* Blue for odd tasks */
+    color: white;
+}
+
+li:nth-child(even) {
+    background-color: white; /* White for even tasks */
+}
+
+li {
+    width: 50%;
+    background-color: white;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
