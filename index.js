@@ -21,7 +21,7 @@ addButton.addEventListener("click", function() {
 });
 
 function addTask() {
-    var name = document.getElementById("name").value;
+    var name = document.getElementById("assignedTo").value;
     var taskName = document.getElementById("taskName").value;
     var description = document.getElementById("description").value;
     var deadLine = document.getElementById("deadLine").value;
@@ -29,7 +29,7 @@ function addTask() {
     var durationUnit = document.getElementById("durationUnit").value;
 
     tasks.push({
-        name: name,
+        assignedTo: assignedTo,
         taskName: taskName,
         description: description,
         deadLine: deadLine,
@@ -40,7 +40,7 @@ function addTask() {
     localStorage.setItem("tasks", JSON.stringify(tasks));
 
     // Clear the input fields
-    document.getElementById("name").value = "";
+    document.getElementById("assignedTo").value = "";
     document.getElementById("taskName").value = "";
     document.getElementById("description").value = "";
     document.getElementById("deadLine").value = "";
@@ -66,7 +66,7 @@ function editTask(index) {
 searchInput.addEventListener("input", function() {
     var searchTerm = searchInput.value.toLowerCase();
     var filteredTasks = tasks.filter(function(task) {
-        return task.name.toLowerCase().includes(searchTerm) || task.taskName.toLowerCase().includes(searchTerm);
+        return task.assignedTo.toLowerCase().includes(searchTerm) || task.taskName.toLowerCase().includes(searchTerm);
     });
     taskList.innerHTML = "";
     filteredTasks.forEach(function (task, index) {
