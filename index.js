@@ -23,7 +23,7 @@ function addTask() {
     var taskList = document.getElementById("taskList");
     var taskItem = document.createElement("li");
     taskItem.className = "task-item";
-    taskItem.innerHTML = `<b>${name}</b> - <strong>${taskName}</strong> -${description} ${taskDuration} ${durationUnit} <button class="delete-button" onclick="deleteTask(this)"> Done </button>`;
+    taskItem.innerHTML = `<b>${name}</b> - <strong>${taskName}</strong> -${description} for ${taskDuration} ${durationUnit} finish before  ${deadLine} <button class="delete-button" onclick="deleteTask(this)"> Done </button>`;
     taskList.appendChild(taskItem);
 
     // Clear the input fields
