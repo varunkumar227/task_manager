@@ -33,6 +33,10 @@ function addTask() {
     document.getElementById("description").value = "";
     document.getElementById("deadLine").value = "";
     document.getElementById("taskDuration").value = "";
+
+    
+
+
 }
 
 function deleteTask(buttonElement) {
@@ -64,3 +68,26 @@ function editTask(buttonElement) {
     var taskList = document.getElementById("taskList");
     taskList.removeChild(taskItem);
 }
+
+
+
+function searchTasks(){
+    console.log("Search Text",$("#searchText").val().trim());
+}
+
+
+$(document).ready( () => {
+    const taskNamesArray = [
+        {"task_name": "First task", "assigned_to": "Ashwin", "description": "This is the fiirst task"},
+        {"task_name": "Second task", "assigned_to": "Kevin", "description": "This is the fiirst task"}
+
+    ];
+    $("#searchTask").click(()=> {
+        console.log("*****************************")
+        // searchTasks()
+        let filteredTasks = taskNamesArray.filter(task => {
+            return task.task_name.includes("fiirst") || task.assigned_to.includes("fiirst") || task.description.includes("fiirst")
+        })
+        console.log("==>>>>>>>>>>>>>>>>>>>>", filteredTasks)
+    })
+});
