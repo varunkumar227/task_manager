@@ -48,7 +48,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"],
+input[type="text"],input[type="date"],
 textarea,
 select {
     width: 33%;

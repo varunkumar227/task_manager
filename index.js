@@ -7,9 +7,10 @@ function addTask() {
     var taskName = document.getElementById("taskName").value.trim();
     var name = document.getElementById("name").value.trim();
     var description = document.getElementById("description").value.trim();
+    var deadLine = document.getElementById("deadLine").value;
     var taskDuration = document.getElementById("taskDuration").value.trim();
     var durationUnit = document.getElementById("durationUnit").value;
-    if (taskName === "" ||name === "" || taskDuration === "") {
+    if (taskName === "" ||name === "" || description === ""|| taskDuration === ""|| deadLine === "") {
         alert("Task details cannot be empty!");
         return;
     }
@@ -18,17 +19,18 @@ function addTask() {
         alert("Task duration must be a numerical value!");
         return;
     }
-    
+
     var taskList = document.getElementById("taskList");
     var taskItem = document.createElement("li");
     taskItem.className = "task-item";
-    taskItem.innerHTML = `<b>${name}</b> - <strong>${taskName}</strong> -${description} ${taskDuration} ${durationUnit} <button class="delete-button" onclick="deleteTask(this)">Delete</button>`;
+    taskItem.innerHTML = `<b>${name}</b> - <strong>${taskName}</strong> -${description} ${taskDuration} ${durationUnit} <button class="delete-button" onclick="deleteTask(this)"> Done </button>`;
     taskList.appendChild(taskItem);
 
     // Clear the input fields
     document.getElementById("taskName").value = "";
     document.getElementById("name").value = "";
     document.getElementById("description").value = "";
+    document.getElementById("deadLine").value = "";
     document.getElementById("taskDuration").value = "";
 }
 
