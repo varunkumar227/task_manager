@@ -57,6 +57,13 @@ select {
     border: 1px solid #ccc;
     border-radius: 3px;
 }
+#search{
+    width: 66.5%;
+    padding: 10px;
+    margin: 15px 0 0 0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
 
 button#addTask {
     background-color: #3498db; /* Blue background */
