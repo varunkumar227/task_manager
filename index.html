@@ -29,7 +29,16 @@
             <option value="minutes">Minutes</option>
         </select>
         <button id="addTask">Add Task</button>
+        <label for="search-filter">Choose a search item:</label> 
+        <select name="search-filter" id="search-filter">
+            <option value="allSearch">All</option>
+            <option value="taskNameSearch">Task Name</option> 
+            <option value="assignedToSearch">Assigned to</option> 
+            <option value="descriptionSearch">Description</option> 
+        </select>
         <input type="text" placeholder="Search" id="search">
+        <button id="searchTask">Search</button>
+
     </div>
     <ul class="task-list" id="taskList">
     </ul>
