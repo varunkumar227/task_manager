@@ -32,9 +32,11 @@ h1 {
 }
 
 .container {
+    width: 70%;
     background-color: white;
     padding: 20px;
-    margin: 20px;
+    margin-top: 20px;
+    margin-left: 15%;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
@@ -48,7 +50,7 @@ label {
 input[type="text"],
 textarea,
 select {
-    width: 100%;
+    width: 33%;
     padding: 8px;
     margin: 5px 0;
     border: 1px solid #ccc;
@@ -87,7 +89,7 @@ li {
     width: 50%;
     background-color: white;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px 230px;
     border: 1px solid #ccc;
     border-radius: 3px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
