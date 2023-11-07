@@ -48,7 +48,7 @@ function editTask(buttonElement) {
     var name = taskItem.querySelector("b").textContent;
     var taskName = taskItem.querySelector("strong").textContent;
     var description = taskItem.textContent.split('-')[2].split('for')[0].trim();
-    var taskDuration = taskItem.textContent.match(/\d+\s\w+/)[0];
+    var taskDuration = taskItem.textContent.match(/\d+\s\w+/)[0].split(' ')[0];
     var durationUnit = taskItem.textContent.match(/\d+\s\w+/)[0].split(' ')[1];
     var deadLine = taskItem.textContent.match(/\d{4}-\d{2}-\d{2}/)[0];
 
