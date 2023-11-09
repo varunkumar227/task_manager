@@ -8,27 +8,38 @@
 </head>
 <body>
     <h1>To do list</h1>
+    <!-- Creating a form to input details -->
     <div class="container" >
+        <!-- Task name input feild -->
         <label for="taskName">Task Name:</label>
         <input type="text" id="taskName"></input>
 
+        <!-- Assignee input feild -->
         <label for="name">Assigned to:</label>
         <input type="text" id="assignedTo"></input>  
 
+        <!-- Description input feild -->
         <label for="description">Description:</label>
         <textarea id="description"></textarea>
 
+        <!-- Deadline input feild -->
         <label for="deadLine">Dead Line:</label>
         <input type="date" id="deadLine"></input>
         
+        <!-- Task Duration input feild -->
         <label for="taskDuration">Time Duration:</label>
         <input type="text" id="taskDuration">
 
+        <!-- Duration units drop down input feild -->
         <select id="durationUnit">
             <option value="hours">Hours</option>
             <option value="minutes">Minutes</option>
         </select>
+
+        <!-- Add task button to push task details -->
         <button id="addTask">Add Task</button>
+
+        <!-- Search drop down for selecting specific field to search -->
         <label for="search-filter">Choose a search item:</label> 
         <select name="search-filter" id="search-filter">
             <option value="allSearch">All</option>
@@ -40,6 +51,8 @@
         <button id="searchTask">Search</button>
 
     </div>
+
+    <!-- Displaying task lists -->
     <ul class="task-list" id="taskList">
     </ul>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
