@@ -57,18 +57,43 @@ function deleteTask(index) {
 }
 
 function editTask(index) {
-    // Edit the task at the specified index
-    // ...
-    console.log("///////////////////////////", index)
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-    updateTaskList();
+     // Extract the task details from the selected task
+    const selectedTask = tasks[index];
+    // Populate the input fields with the task details for editing
+    $("#assignedTo").val(selectedTask.assignedTo);
+    $("#taskName").val(selectedTask.taskName);
+    $("#description").val(selectedTask.description);
+    $("#deadLine").val(selectedTask.deadLine);
+    $("#taskDuration").val(selectedTask.taskDuration);
+    $("#durationUnit").val(selectedTask.durationUnit);
+
+    // Remove the existing task item from the task list
+    tasks.splice(index, 1);
+    // Update the task list
+    updateTaskList($("#taskList"), JSON.parse(localStorage.getItem("tasks")) || []);
 }
 
 function searchTasks(searchQuery, taskList) {
     const taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
-    let filteredTasks = taskArray.filter(task => {
-        return task.taskName.includes(searchQuery) || task.assignedTo.includes(searchQuery) || task.description.includes(searchQuery)
-    })
+    let filteredTasks = []
+    const searchFilter = $("#search-filter").val();
+    if (searchFilter == "taskNameSearch") {
+        filteredTasks = taskArray.filter(task => {
+            return task.taskName.includes(searchQuery)
+        })
+    } else if (searchFilter == "assignedToSearch") {
+        filteredTasks = taskArray.filter(task => {
+            return task.assignedTo.includes(searchQuery)
+        }) 
+    } else if (searchFilter == "descriptionSearch") {
+        filteredTasks = taskArray.filter(task => {
+            return task.description.includes(searchQuery)
+        }) 
+    } else {
+        filteredTasks = taskArray.filter(task => {
+            return task.taskName.includes(searchQuery) || task.assignedTo.includes(searchQuery) || task.description.includes(searchQuery)
+        })
+    }
     updateTaskList(taskList, filteredTasks);
 }
 
