@@ -1,22 +1,25 @@
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function updateTaskList(taskList, taskArray) {
-    if (taskList) { taskList.html("") };
+    if (taskList) {
+        taskList.html("");
+    }
     taskArray.forEach(function (task, index) {
         let taskItem = document.createElement("li");
         taskItem.className = "task-item";
-        taskItem.innerHTML = `<b>${task.assignedTo}</b> - <strong>${task.taskName}</strong> - ${task.description} for ${task.taskDuration} ${task.durationUnit} finish before ${task.deadLine}  <button class='delete-button' onclick='deleteTask(${index})'> Delete </button> <button class='edit-button' onclick='editTask(${index})'> Edit </button>`;
+        taskItem.innerHTML = `<b>${task.assignedTo}</b> - <strong>${task.taskName}</strong> - ${task.description} for ${task.taskDuration} ${task.durationUnit} finish before ${task.deadLine} <button class='delete-button' onclick='deleteTask(${index})'> Delete </button> <button class='edit-button' onclick='editTask(${index})'> Edit </button>`;
         taskList.append(taskItem);
     });
 }
 
-function addTask(taskArray) {
+function addTask(taskArray, editIndex) {
     const assignedTo = $("#assignedTo").val();
     const taskName = $("#taskName").val();
     const description = $("#description").val();
     const deadLine = $("#deadLine").val();
     const taskDuration = $("#taskDuration").val();
     const durationUnit = $("#durationUnit").val();
+
     if (taskName === "" || assignedTo === "" || description === "" || taskDuration === "" || deadLine === "") {
         alert("Task details cannot be empty!");
         return;
@@ -27,17 +30,22 @@ function addTask(taskArray) {
         return;
     }
 
-    taskArray.push({
+    const task = {
         assignedTo: assignedTo,
         taskName: taskName,
         description: description,
         deadLine: deadLine,
         taskDuration: taskDuration,
         durationUnit: durationUnit,
-    });
+    };
 
-    localStorage.removeItem("tasks");
-    localStorage.setItem("tasks", JSON.stringify(taskArray));
+    if (typeof editIndex === "number" && editIndex >= 0) {
+        // Editing an existing task
+        taskArray[editIndex] = task;
+    } else {
+        // Adding a new task
+        taskArray.push(task);
+    }
 
     // Clear the input fields
     $("#assignedTo").val("");
@@ -45,6 +53,9 @@ function addTask(taskArray) {
     $("#description").val("");
     $("#deadLine").val("");
     $("#taskDuration").val("");
+
+    localStorage.removeItem("tasks");
+    localStorage.setItem("tasks", JSON.stringify(taskArray));
 
     updateTaskList($("#taskList"), taskArray);
 }
@@ -57,8 +68,10 @@ function deleteTask(index) {
 }
 
 function editTask(index) {
-     // Extract the task details from the selected task
+
+    // Extract the task details from the selected task
     const selectedTask = tasks[index];
+
     // Populate the input fields with the task details for editing
     $("#assignedTo").val(selectedTask.assignedTo);
     $("#taskName").val(selectedTask.taskName);
@@ -69,8 +82,9 @@ function editTask(index) {
 
     // Remove the existing task item from the task list
     tasks.splice(index, 1);
+
     // Update the task list
-    updateTaskList($("#taskList"), JSON.parse(localStorage.getItem("tasks")) || []);
+    updateTaskList($("#taskList"), tasks);
 }
 
 function searchTasks(searchQuery, taskList) {
