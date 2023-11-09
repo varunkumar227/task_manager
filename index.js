@@ -1,6 +1,7 @@
 let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
 function updateTaskList(taskList, taskArray) {
+    // this function is for updating the task list
     if (taskList) {
         taskList.html("");
     }
@@ -13,6 +14,7 @@ function updateTaskList(taskList, taskArray) {
 }
 
 function addTask(taskArray, editIndex) {
+    // this function is for adding task 
     const assignedTo = $("#assignedTo").val();
     const taskName = $("#taskName").val();
     const description = $("#description").val();
@@ -20,6 +22,7 @@ function addTask(taskArray, editIndex) {
     const taskDuration = $("#taskDuration").val();
     const durationUnit = $("#durationUnit").val();
 
+    // to check if any fields are empty while adding a task
     if (taskName === "" || assignedTo === "" || description === "" || taskDuration === "" || deadLine === "") {
         alert("Task details cannot be empty!");
         return;
@@ -55,12 +58,14 @@ function addTask(taskArray, editIndex) {
     $("#taskDuration").val("");
 
     localStorage.removeItem("tasks");
+    // to add an item to localstorage
     localStorage.setItem("tasks", JSON.stringify(taskArray));
 
     updateTaskList($("#taskList"), taskArray);
 }
 
 function deleteTask(index) {
+    // this function is for deleting a task
     tasks.splice(index, 1);
     localStorage.removeItem("tasks");
     localStorage.setItem("tasks", JSON.stringify(tasks));
@@ -68,6 +73,7 @@ function deleteTask(index) {
 }
 
 function editTask(index) {
+    // this function is for editing a specific task
 
     // Extract the task details from the selected task
     const selectedTask = tasks[index];
@@ -116,7 +122,6 @@ function searchTasks(searchQuery, taskList) {
 }
 
 $(document).ready(() => {
-    let searchInput = $("#search");
     let taskList = $("#taskList");
 
     tasks = JSON.parse(localStorage.getItem("tasks")) || [];
