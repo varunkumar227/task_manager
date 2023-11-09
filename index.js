@@ -89,25 +89,29 @@ function editTask(index) {
 
 function searchTasks(searchQuery, taskList) {
     const taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
-    let filteredTasks = []
+    const searchQueryWords = searchQuery.trim().toLowerCase().split(' ');
+    let filteredTasks = [];
     const searchFilter = $("#search-filter").val();
-    if (searchFilter == "taskNameSearch") {
-        filteredTasks = taskArray.filter(task => {
-            return task.taskName.includes(searchQuery)
-        })
-    } else if (searchFilter == "assignedToSearch") {
-        filteredTasks = taskArray.filter(task => {
-            return task.assignedTo.includes(searchQuery)
-        }) 
-    } else if (searchFilter == "descriptionSearch") {
-        filteredTasks = taskArray.filter(task => {
-            return task.description.includes(searchQuery)
-        }) 
-    } else {
-        filteredTasks = taskArray.filter(task => {
-            return task.taskName.includes(searchQuery) || task.assignedTo.includes(searchQuery) || task.description.includes(searchQuery)
-        })
-    }
+
+    filteredTasks = taskArray.filter(task => {
+        return searchQueryWords.some(word => {
+            const lowerCaseWord = word.toLowerCase();
+            if (searchFilter == "taskNameSearch") {
+                return task.taskName.toLowerCase().includes(lowerCaseWord);
+            } else if (searchFilter == "assignedToSearch") {
+                return task.assignedTo.toLowerCase().includes(lowerCaseWord);
+            } else if (searchFilter == "descriptionSearch") {
+                return task.description.toLowerCase().includes(lowerCaseWord);
+            } else {
+                return (
+                    task.taskName.toLowerCase().includes(lowerCaseWord) ||
+                    task.assignedTo.toLowerCase().includes(lowerCaseWord) ||
+                    task.description.toLowerCase().includes(lowerCaseWord)
+                );
+            }
+        });
+    });
+
     updateTaskList(taskList, filteredTasks);
 }
 
