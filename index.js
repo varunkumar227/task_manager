@@ -68,6 +68,7 @@ function deleteTask(index) {
 }
 
 function editTask(index) {
+
     // Extract the task details from the selected task
     const selectedTask = tasks[index];
 
@@ -88,9 +89,25 @@ function editTask(index) {
 
 function searchTasks(searchQuery, taskList) {
     const taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
-    let filteredTasks = taskArray.filter(task => {
-        return task.taskName.includes(searchQuery) || task.assignedTo.includes(searchQuery) || task.description.includes(searchQuery)
-    })
+    let filteredTasks = []
+    const searchFilter = $("#search-filter").val();
+    if (searchFilter == "taskNameSearch") {
+        filteredTasks = taskArray.filter(task => {
+            return task.taskName.includes(searchQuery)
+        })
+    } else if (searchFilter == "assignedToSearch") {
+        filteredTasks = taskArray.filter(task => {
+            return task.assignedTo.includes(searchQuery)
+        }) 
+    } else if (searchFilter == "descriptionSearch") {
+        filteredTasks = taskArray.filter(task => {
+            return task.description.includes(searchQuery)
+        }) 
+    } else {
+        filteredTasks = taskArray.filter(task => {
+            return task.taskName.includes(searchQuery) || task.assignedTo.includes(searchQuery) || task.description.includes(searchQuery)
+        })
+    }
     updateTaskList(taskList, filteredTasks);
 }
 
