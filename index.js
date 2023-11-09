@@ -94,21 +94,28 @@ function editTask(index) {
 }
 
 function searchTasks(searchQuery, taskList) {
+    // this function is for searching an item in the task list
+
     const taskArray = JSON.parse(localStorage.getItem("tasks")) || [];
     const searchQueryWords = searchQuery.trim().toLowerCase().split(' ');
     let filteredTasks = [];
     const searchFilter = $("#search-filter").val();
 
+    // task filtering 
     filteredTasks = taskArray.filter(task => {
         return searchQueryWords.some(word => {
             const lowerCaseWord = word.toLowerCase();
             if (searchFilter == "taskNameSearch") {
+                // to search in task name only
                 return task.taskName.toLowerCase().includes(lowerCaseWord);
             } else if (searchFilter == "assignedToSearch") {
+                // to search in assigned to only
                 return task.assignedTo.toLowerCase().includes(lowerCaseWord);
             } else if (searchFilter == "descriptionSearch") {
+                // to search in description only
                 return task.description.toLowerCase().includes(lowerCaseWord);
             } else {
+                // to search in task name, assigned to and description only
                 return (
                     task.taskName.toLowerCase().includes(lowerCaseWord) ||
                     task.assignedTo.toLowerCase().includes(lowerCaseWord) ||
